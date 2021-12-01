@@ -4,24 +4,28 @@ import Card from './Card';
 
 function Main({ handleEditAvatarClick, handleEditProfileClick, handleAddPlaceClick, handleDeleteCardClick, onCardClick }) {
 
-    const [isUserName, setIsUserName] = useState("");
+    const [userName, setUserName] = useState("");
 
-    const [isUserDescription, setIsUserDescription] = useState("");
+    const [userDescription, setUserDescription] = useState("");
 
-    const [isUserAvatar, setIsUserAvatar] = useState("");
+    const [userAvatar, setUserAvatar] = useState("");
 
     const [cards, setCards] = useState([]);
 
     useEffect(() => {
-        api.getUserInfo().then((objectInfo) => {
-            setIsUserName(objectInfo.name);
-            setIsUserDescription(objectInfo.about);
-            setIsUserAvatar(objectInfo.avatar)
-        });
-        api.getAllCards().then((cardList) => {
+        api.getUserInfo()
+        .then((objectInfo) => {
+            setUserName(objectInfo.name);
+            setUserDescription(objectInfo.about);
+            setUserAvatar(objectInfo.avatar)
+        })
+        .catch((err) => alert(err));
+
+        api.getAllCards()
+        .then((cardList) => {
             setCards(cardList)
         })
-
+        .catch((err) => alert(err));
     }, [])
 
     return (
@@ -32,16 +36,16 @@ function Main({ handleEditAvatarClick, handleEditProfileClick, handleAddPlaceCli
                 <div className="researcher__profile">
 
                     <div className="researcher__profile-image-add" onClick={handleEditAvatarClick} >
-                        <img className="researcher__profile-image" src={isUserAvatar} alt="Жак-Ив Кусто"  />
+                        <img className="researcher__profile-image" src={userAvatar} alt="Жак-Ив Кусто"  />
                     </div>
 
                     <div className="researcher__profile-text">
 
                         <div className="researcher__profile-text-top">
-                            <h1 className="researcher__title">{isUserName}</h1>
+                            <h1 className="researcher__title">{userName}</h1>
                             <button className="researcher__edit-button" id="open_popup_btn" aria-label="Редактировать профиль" type="button" onClick={handleEditProfileClick}></button>
                         </div>
-                        <p className="researcher__profile-text-discription">{isUserDescription}</p>
+                        <p className="researcher__profile-text-discription">{userDescription}</p>
 
                     </div>
                 </div>
@@ -52,7 +56,7 @@ function Main({ handleEditAvatarClick, handleEditProfileClick, handleAddPlaceCli
 
             <section className="photo-grid">
                 {cards.map((cardElement) => (
-                   <Card key={cardElement.id} cardElement={cardElement} onCardClick={onCardClick} handleDeleteCardClick={handleDeleteCardClick}  />
+                   <Card key={cardElement._id} cardElement={cardElement} onCardClick={onCardClick} handleDeleteCardClick={handleDeleteCardClick}  />
                 ))}
             </section>
 

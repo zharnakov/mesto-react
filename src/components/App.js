@@ -33,7 +33,7 @@ function App() {
         setIsDeleteCardPopupOpen(true);
     }
 
-    const [selectedCard, setSelectedCard] = useState();
+    const [selectedCard, setSelectedCard] = useState({name: '', link: ''});
 
     function handleCardClick(cardElement) {
         setSelectedCard(cardElement);
@@ -44,7 +44,7 @@ function App() {
         setIsAddPlacePopupOpen(false);
         setIsEditAvatarPopupOpen(false);
         setIsDeleteCardPopupOpen(false);
-        setSelectedCard();
+        setSelectedCard({name: '', link: ''});
     }
 
     return (
@@ -53,7 +53,7 @@ function App() {
                 <Header />
                 <Main handleEditProfileClick={handleEditProfileClick} handleAddPlaceClick={handleAddPlaceClick} handleEditAvatarClick={handleEditAvatarClick} handleDeleteCardClick={handleDeleteCardClick} onCardClick={handleCardClick} />
                 <Footer />
-                <PopupWithForm name={'editProfile'} title={"Редактировать профиль"} buttonName={"Сохранить"} children isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
+                <PopupWithForm name={'editProfile'} title={"Редактировать профиль"} buttonName={"Сохранить"} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
                     <div className="form__section">
                         <input className="form__input" type="text" name="name" id="input-name" placeholder="Имя" required minLength="2" maxLength="40" />
                         <span className="form__input-error input-name-error"></span>
@@ -64,7 +64,7 @@ function App() {
                     </div>
                 </PopupWithForm>
 
-                <PopupWithForm name={'addCard'} title={'Новое место'} buttonName={'Создать'} children isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
+                <PopupWithForm name={'addCard'} title={'Новое место'} buttonName={'Создать'} isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
                     <div className="form__section">
                         <input className="form__input" type="text" name="titleImage" id="input-titleImage" placeholder="Название" required minLength="2" maxLength="30" />
                         <span className="form__input-error input-titleImage-error"></span>
@@ -75,14 +75,14 @@ function App() {
                     </div>
                 </PopupWithForm>
 
-                <PopupWithForm name={'updateAvatar'} title={'Обновить аватар'} buttonName={'Сохранить'} children isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
+                <PopupWithForm name={'updateAvatar'} title={'Обновить аватар'} buttonName={'Сохранить'} isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
                     <div className="form__section">
                         <input className="form__input" type="url" name="avatarLink" id="input-avatarLink" placeholder="Ссылка на картинку" required />
                         <span className="form__input-error input-avatarLink-error"></span>
                     </div>
                 </PopupWithForm>
 
-                <PopupWithForm name={'deleteCard'} title={'Вы уверены?'} buttonName={'Да'} isOpen={isDeleteCardPopupOpen} children onClose={closeAllPopups} />
+                <PopupWithForm name={'deleteCard'} title={'Вы уверены?'} buttonName={'Да'} isOpen={isDeleteCardPopupOpen} onClose={closeAllPopups} />
                 <ImagePopup cardElement={selectedCard} onClose={closeAllPopups} />
 
             </div>
