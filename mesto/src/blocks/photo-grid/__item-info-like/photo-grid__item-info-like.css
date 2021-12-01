@@ -1,0 +1,17 @@
+.photo-grid__item-info-like {
+    max-height: 19px;
+    background-image: url(../../../images/like-icon.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border: none;
+    height: 19px;
+    width: 22px;
+    outline: none;
+    background-color: transparent;
+}
+
+.photo-grid__item-info-like:hover {
+    cursor: pointer;
+    opacity: 0.5;
+}

@@ -1,0 +1,52 @@
+.researcher__profile-image-add {
+    max-width: 120px;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+    position: relative;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 535px) {
+    .researcher__profile-image-add {
+        margin-bottom: 20px;
+    }
+}
+
+.researcher__profile-image-add::after {
+    background-image: url(../../../images/VectorForUserPhoto.svg);
+    content: '';
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    opacity: 0;
+    z-index: 1;
+}
+
+.researcher__profile-image-add::before {
+    background: #2a2C2F;
+    opacity: 0;
+    transition: 0.3s;
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.researcher__profile-image-add:hover::after {
+    opacity: 1;
+}
+
+.researcher__profile-image-add:hover::before {
+    opacity: 0.8;
+}
+
+
+

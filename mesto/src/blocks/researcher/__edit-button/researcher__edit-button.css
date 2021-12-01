@@ -1,0 +1,24 @@
+.researcher__edit-button {
+    margin-left: 18px;
+    cursor: pointer;
+    background-image: url(../../../images/rectangle-icon.svg);
+    background-repeat: no-repeat;
+    min-width: 24px;
+    min-height: 24px;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    padding: 0;
+    background-size: cover;
+}
+
+@media screen and (max-width: 700px) {
+    .researcher__edit-button {
+        min-width: 18px;
+        min-height: 18px;
+        margin-left: 10px;
+    }
+}
+
+.researcher__edit-button:hover {
+    opacity: 0.6;
+}

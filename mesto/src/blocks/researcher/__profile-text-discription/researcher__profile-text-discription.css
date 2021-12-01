@@ -1,0 +1,24 @@
+.researcher__profile-text-discription {
+    color: #FFFFFF;
+    font-size: 18px;
+    line-height: 22px;
+    margin: 16px 0 0 0;
+    font-weight: normal;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 350px;
+}
+
+@media screen and (max-width: 760px) {
+    .researcher__profile-text-discription {
+        font-size: 14px;
+        line-height: 17px;
+    }
+}
+
+@media screen and (max-width: 535px) {
+    .researcher__profile-text-discription {
+        max-width: 230px;
+    }
+}

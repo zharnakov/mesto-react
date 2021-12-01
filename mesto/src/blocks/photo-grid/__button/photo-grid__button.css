@@ -1,0 +1,18 @@
+.photo-grid__button {
+    background-image: url(../../../images/Vector.svg);
+    background-repeat: no-repeat;
+    cursor: pointer;
+    position: absolute;
+    min-width: 18px;
+    min-height: 19px;
+    border: none;
+    top: 18px;
+    right: 15px;
+    background-color: rgba(0, 0, 0, 0);
+    visibility: visible;
+}
+
+.photo-grid__button:hover {
+    opacity: 0.6;
+    outline: none;
+}

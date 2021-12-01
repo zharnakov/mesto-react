@@ -1,0 +1,21 @@
+.researcher__button {
+    min-width: 150px;
+    min-height: 50px;
+    background-color: rgba(0, 0, 0, 0);
+    border: 2px solid rgb(255, 255, 255);
+    cursor: pointer;
+    background-image: url(../../../images/plus.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+@media screen and (max-width: 760px) {
+    .researcher__button {
+        width: 100%;
+        margin: 36px 0 0;
+    }
+}
+
+.researcher__button:hover {
+    opacity: 0.6;
+}

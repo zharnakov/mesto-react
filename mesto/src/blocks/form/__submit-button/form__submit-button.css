@@ -1,0 +1,22 @@
+.form__submit-button {
+    margin: 18px auto 37px;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    min-width: 358px;
+    min-height: 50px;
+    cursor: pointer;
+    border: none;
+}
+
+.form__submit-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+@media screen and (max-width: 535px) {
+    .form__submit-button {
+        margin: 15px auto 25px;
+        min-width: 238px;
+        min-height: 46px;
+        cursor: pointer;
+    }
+}
