@@ -10,12 +10,12 @@ import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
 function App() {
 
-    const [currentUser, setCurrentUser] = useState({ name: '', about: '', avatar: '' });
+    const [currentUser, setCurrentUser] = useState({ name: '', about: '', avatar: '', _id: '' });
 
     useEffect(() => {
         api.getUserInfo()
             .then((objectInfo) => {
-                setCurrentUser({ name: objectInfo.name, about: objectInfo.about, avatar: objectInfo.avatar })
+                setCurrentUser(objectInfo)
             })
             .catch((err) => alert(err));
     }, [])
