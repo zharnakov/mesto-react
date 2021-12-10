@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import headerLogo from '../images/logotip.svg'
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -7,6 +6,7 @@ import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import api from '../utils/Api';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
+import EditProfilePopup from './EditProfilePopup';
 
 function App() {
 
@@ -61,6 +61,15 @@ function App() {
         setSelectedCard({ name: '', link: '' });
     }
 
+    function handleUpdateUser(newObjectInfo) {
+        api.changeUserInfo(newObjectInfo)
+        .then((objectInfo) => {
+            setCurrentUser(objectInfo)
+            closeAllPopups()
+        })
+        .catch((err) => alert(err));
+    }
+
     return (
         <CurrentUserContext.Provider value={currentUser}>
             <div className="page">
@@ -68,16 +77,8 @@ function App() {
                     <Header />
                     <Main handleEditProfileClick={handleEditProfileClick} handleAddPlaceClick={handleAddPlaceClick} handleEditAvatarClick={handleEditAvatarClick} handleDeleteCardClick={handleDeleteCardClick} onCardClick={handleCardClick} />
                     <Footer />
-                    <PopupWithForm name={'editProfile'} title={"Редактировать профиль"} buttonName={"Сохранить"} isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
-                        <div className="form__section">
-                            <input className="form__input" type="text" name="name" id="input-name" placeholder="Имя" required minLength="2" maxLength="40" />
-                            <span className="form__input-error input-name-error"></span>
-                        </div>
-                        <div className="form__section">
-                            <input className="form__input" type="text" name="occupation" id="input-occupation" placeholder="Род деятельности" required minLength="2" maxLength="200" />
-                            <span className="form__input-error input-occupation-error"></span>
-                        </div>
-                    </PopupWithForm>
+                    
+                    <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />  
 
                     <PopupWithForm name={'addCard'} title={'Новое место'} buttonName={'Создать'} isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
                         <div className="form__section">

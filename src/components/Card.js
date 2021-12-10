@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import api from "../utils/Api";
+import React from "react";
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
 function Card({ cardElement, onCardClick, handleDeleteCardClick, onCardLike, onCardDelete }) {
@@ -15,8 +14,6 @@ function Card({ cardElement, onCardClick, handleDeleteCardClick, onCardLike, onC
 
     function handleDeleteClick() {
         onCardDelete(cardElement);
-
-
     }
 
     // Определяем, являемся ли мы владельцем текущей карточки
@@ -33,7 +30,7 @@ function Card({ cardElement, onCardClick, handleDeleteCardClick, onCardLike, onC
 
     return (
         <article className="photo-grid__item" >
-            <img className="photo-grid__item-image" src={cardElement.link} onClick={handleClick} />
+            <img className="photo-grid__item-image" src={cardElement.link} onClick={handleClick} alt={cardElement.name} />
             <button className={cardDeleteButtonClassName} aria-label="удаление карточки" type="button" onClick={handleDeleteClick}></button>
             <div className="photo-grid__item-info">
                 <h2 className="photo-grid__item-info-title">{cardElement.name}</h2>
