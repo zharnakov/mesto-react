@@ -7,6 +7,7 @@ import ImagePopup from './ImagePopup';
 import api from '../utils/Api';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 
 function App() {
 
@@ -70,6 +71,15 @@ function App() {
         .catch((err) => alert(err));
     }
 
+    function handleUpdateAvatar(newObjectWithSrcOnAvatar) {
+        api.changeUserPhoto(newObjectWithSrcOnAvatar)
+        .then((objectInfo) => {
+            setCurrentUser(objectInfo)
+            closeAllPopups()
+        })
+        .catch((err) => alert(err));
+    }
+
     return (
         <CurrentUserContext.Provider value={currentUser}>
             <div className="page">
@@ -91,12 +101,7 @@ function App() {
                         </div>
                     </PopupWithForm>
 
-                    <PopupWithForm name={'updateAvatar'} title={'Обновить аватар'} buttonName={'Сохранить'} isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}>
-                        <div className="form__section">
-                            <input className="form__input" type="url" name="avatarLink" id="input-avatarLink" placeholder="Ссылка на картинку" required />
-                            <span className="form__input-error input-avatarLink-error"></span>
-                        </div>
-                    </PopupWithForm>
+                    <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
 
                     <PopupWithForm name={'deleteCard'} title={'Вы уверены?'} buttonName={'Да'} isOpen={isDeleteCardPopupOpen} onClose={closeAllPopups} />
                     <ImagePopup cardElement={selectedCard} onClose={closeAllPopups} />
