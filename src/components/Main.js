@@ -1,40 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import api from '../utils/Api';
 import Card from './Card';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-function Main({ handleEditAvatarClick, handleEditProfileClick, handleAddPlaceClick, handleDeleteCardClick, onCardClick }) {
+function Main({ handleEditAvatarClick, handleEditProfileClick, handleAddPlaceClick, handleDeleteCardClick, onCardClick, onCardLike, onCardDelete, cards }) {
 
     const currentUser = React.useContext(CurrentUserContext);
-
-    const [cards, setCards] = useState([]);
-
-    function handleCardLike(card) {
-        // проверяем, есть ли уже лайк на этой карточке
-        const isLiked = card.likes.some(i => i._id === currentUser._id);
-
-        // Отправляем запрос в API и получаем обновлённые данные карточки
-        api.changeLikeCardStatus(card._id, isLiked)
-            .then((newCard) => {
-                setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-            });
-    }
-
-    function handleCardDelete(card) {
-        api.deleteCard(card._id)
-            .then((newCard) => {
-                setCards((state) => state.filter((item) => item._id !== card._id));
-            });
-    }
-
-
-    useEffect(() => {
-        api.getAllCards()
-            .then((cardList) => {
-                setCards(cardList)
-            })
-            .catch((err) => alert(err));
-    }, [])
 
     return (
         <main className="content">
@@ -64,7 +34,7 @@ function Main({ handleEditAvatarClick, handleEditProfileClick, handleAddPlaceCli
 
             <section className="photo-grid">
                 {cards.map((cardElement) => (
-                    <Card key={cardElement._id} cardElement={cardElement} onCardClick={onCardClick} handleDeleteCardClick={handleDeleteCardClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete} />
+                    <Card key={cardElement._id} cardElement={cardElement} onCardClick={onCardClick} handleDeleteCardClick={handleDeleteCardClick} onCardLike={onCardLike} onCardDelete={onCardDelete} />
                 ))}
             </section>
 
