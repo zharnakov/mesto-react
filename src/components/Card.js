@@ -1,7 +1,7 @@
 import React from "react";
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
-function Card({ cardElement, onCardClick, handleDeleteCardClick, onCardLike, onCardDelete }) {
+function Card({ cardElement, onCardClick, onCardLike, onCardDelete }) {
     const currentUser = React.useContext(CurrentUserContext);
 
     function handleClick() {
@@ -12,7 +12,7 @@ function Card({ cardElement, onCardClick, handleDeleteCardClick, onCardLike, onC
         onCardLike(cardElement);
     }
 
-    function handleDeleteClick() {
+    function handleDeleteCardClick() {
         onCardDelete(cardElement);
     }
 
@@ -31,7 +31,7 @@ function Card({ cardElement, onCardClick, handleDeleteCardClick, onCardLike, onC
     return (
         <article className="photo-grid__item" >
             <img className="photo-grid__item-image" src={cardElement.link} onClick={handleClick} alt={cardElement.name} />
-            <button className={cardDeleteButtonClassName} aria-label="удаление карточки" type="button" onClick={handleDeleteClick}></button>
+            <button className={cardDeleteButtonClassName} aria-label="удаление карточки" type="button" onClick={handleDeleteCardClick}></button>
             <div className="photo-grid__item-info">
                 <h2 className="photo-grid__item-info-title">{cardElement.name}</h2>
                 <button className={cardLikeButtonClassName} aria-label="Лайк-сердечко" type="button" onClick={handleLike}></button>

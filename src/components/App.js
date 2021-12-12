@@ -42,14 +42,16 @@ function App() {
         setIsEditAvatarPopupOpen(true);
     }
 
-    //    функция handleDeleteCardClick никому не присвоена
     const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = useState(false);
 
-    function handleDeleteCardClick() {
+    function handleDeleteCardClick(card) {
         setIsDeleteCardPopupOpen(true);
+        setCardForRemoval(card)
     }
 
     const [selectedCard, setSelectedCard] = useState({ name: '', link: '' });
+
+    const [cardForRemoval, setCardForRemoval] = useState({_id: ""});
 
     function handleCardClick(cardElement) {
         setSelectedCard(cardElement);
@@ -91,13 +93,17 @@ function App() {
         api.changeLikeCardStatus(card._id, isLiked)
             .then((newCard) => {
                 setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-            });
+            })
+            .catch((err) => alert(err));;
     }
 
-    function handleCardDelete(card) {
-        api.deleteCard(card._id)
-            .then((newCard) => {
-                setCards((state) => state.filter((item) => item._id !== card._id));
+    function handleCardDelete(e) {
+        e.preventDefault();
+        api.deleteCard(cardForRemoval._id)
+            .then(() => {
+                setCards((state) => state.filter((item) => item._id !== cardForRemoval._id));
+                closeAllPopups();
+                setCardForRemoval({_id: ""});
             })
             .catch((err) => alert(err));
     }
@@ -126,13 +132,13 @@ function App() {
             <div className="page">
                 <div className="page__container">
                     <Header />
-                    <Main handleEditProfileClick={handleEditProfileClick} handleAddPlaceClick={handleAddPlaceClick} handleEditAvatarClick={handleEditAvatarClick} handleDeleteCardClick={handleDeleteCardClick} onCardClick={handleCardClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete} cards={cards} />
+                    <Main handleEditProfileClick={handleEditProfileClick} handleAddPlaceClick={handleAddPlaceClick} handleEditAvatarClick={handleEditAvatarClick} handleDeleteCardClick={handleDeleteCardClick} onCardClick={handleCardClick} onCardLike={handleCardLike} cards={cards} />
                     <Footer />
                     
                     <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} /> 
                     <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} />  
                     <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
-                    <PopupWithForm name={'deleteCard'} title={'Вы уверены?'} buttonName={'Да'} isOpen={isDeleteCardPopupOpen} onClose={closeAllPopups} />
+                    <PopupWithForm name={'deleteCard'} title={'Вы уверены?'} buttonName={'Да'} isOpen={isDeleteCardPopupOpen} onClose={closeAllPopups} onSubmit={handleCardDelete}/>
                     <ImagePopup cardElement={selectedCard} onClose={closeAllPopups} />
 
                 </div>
