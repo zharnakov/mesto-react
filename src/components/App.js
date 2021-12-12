@@ -98,7 +98,8 @@ function App() {
         api.deleteCard(card._id)
             .then((newCard) => {
                 setCards((state) => state.filter((item) => item._id !== card._id));
-            });
+            })
+            .catch((err) => alert(err));
     }
 
     useEffect(() => {
@@ -114,7 +115,9 @@ function App() {
         .then((newCard) => {
             setCards([newCard, ...cards]); 
             closeAllPopups()
+
         })
+        .catch((err) => alert(err));
     }
 
 
