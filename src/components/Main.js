@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Card from './Card';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-function Main({ handleEditAvatarClick, handleEditProfileClick, handleAddPlaceClick, handleDeleteCardClick, onCardClick, onCardLike, onCardDelete, cards }) {
+function Main({ handleEditAvatarClick, handleEditProfileClick, handleAddPlaceClick, handleDeleteCardClick, onCardClick, onCardLike, cards }) {
 
     const currentUser = React.useContext(CurrentUserContext);
 
@@ -34,7 +34,7 @@ function Main({ handleEditAvatarClick, handleEditProfileClick, handleAddPlaceCli
 
             <section className="photo-grid">
                 {cards.map((cardElement) => (
-                    <Card key={cardElement._id} cardElement={cardElement} onCardClick={onCardClick} handleDeleteCardClick={handleDeleteCardClick} onCardLike={onCardLike} onCardDelete={onCardDelete} />
+                    <Card key={cardElement._id} cardElement={cardElement} onCardClick={onCardClick} onCardLike={onCardLike} onCardDelete={handleDeleteCardClick} />
                 ))}
             </section>
 
