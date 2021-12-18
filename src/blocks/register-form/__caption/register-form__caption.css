@@ -1,0 +1,11 @@
+.register-form__caption {
+color: white;
+text-decoration: none;
+font-weight: 400;
+font-size: 14px;
+line-height: 17px;
+}
+
+.register-form__caption:hover {
+    opacity: 0.6
+}

@@ -1,0 +1,13 @@
+.header__link_sign-in {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.header__link_sign-in:hover {
+    opacity: 0.6;
+}

@@ -1,0 +1,12 @@
+.register-form__input {
+    padding-bottom: 13px;
+    border: none;
+    border-bottom: 2px solid rgb(255, 255, 255);
+    font-size: 14px;
+    line-height: 17px;
+    margin: 0 auto 30px;
+    min-width: 358px;
+    outline: none;
+    background-color: black;
+    color: white;
+}

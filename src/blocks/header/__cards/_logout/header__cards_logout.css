@@ -1,0 +1,12 @@
+.header__cards_logout {
+    color: white;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    text-decoration: none;
+    margin-left: 24px;
+}
+
+.header__cards_logout:hover {
+    opacity: 0.6;
+}
