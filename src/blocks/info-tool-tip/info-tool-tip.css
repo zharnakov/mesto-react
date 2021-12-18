@@ -1,0 +1,4 @@
+.info-tool-tip {
+    display: flex;
+    flex-direction: column;
+}
