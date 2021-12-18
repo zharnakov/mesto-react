@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-// import Header from './Header';
 import Cards from './Cards';
 import Login from './Login';
 import Register from './Register';
@@ -10,11 +9,14 @@ import ProtectedRoute from './ProtectedRoute';
 
 function App() {
     const [loggedIn, setLoggedIn] = useState(false);
+    const [email, setEmail] = useState('');
     const navigate = useNavigate();
 
-    const handleLogin = () => {
+    const handleLogin = (email) => {
         setLoggedIn(true)
+        setEmail(email)
     }
+
     const handleTokenCheck = (path) => {
         if (localStorage.getItem('jwt')) {
             auth
@@ -23,6 +25,7 @@ function App() {
                     if (res) {
                         setLoggedIn(true)
                         navigate(path)
+                        setEmail(res.data.email)
                     }
                 })
         }
@@ -31,14 +34,20 @@ function App() {
         handleTokenCheck('/')
     }, [])
 
+    const handleLogout = (event) => {
+        event.preventDefault()
+        localStorage.removeItem('jwt')
+        setLoggedIn(false)
+        navigate('/sign-in')
+      }
+
     return (
         <div className="page">
             <div className="page__container">
-                {/* <Header /> */}
                 <Routes>
                     <Route path="/sign-in" element={<Login onLogin={handleLogin} />} />
                     <Route path="/sign-up" element={<Register />} />
-                    <Route exact path="/" element={<ProtectedRoute loggedIn={loggedIn}><Cards /></ProtectedRoute>} />
+                    <Route exact path="/" element={<ProtectedRoute loggedIn={loggedIn}><Cards email={email} handleLogout={handleLogout} /></ProtectedRoute>} />
                 </Routes>
 
             </div>

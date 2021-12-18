@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import headerLogo from '../images/logotip.svg'
 import { Link, useNavigate } from 'react-router-dom';
 import * as auth from '../utils/auth'
 import InfoTooltip from './InfoTooltip'
 import successIcon from '../images/successIcon.svg'
 import failedAttempt from '../images/failedAttempt.svg'
+import Header from "./Header";
 
 function Register({loggedIn}) {
     const [values, setValues] = useState({
@@ -41,7 +41,7 @@ function Register({loggedIn}) {
             auth
                 .register(values.email, values.password)
                 .then(res => {
-                    if (res.data._id) {
+                    if (res.data && res.data._id) {
                         openSuccessPopup();
                     } else {
                         openFailedPopup();
@@ -69,10 +69,9 @@ function closeFailedPopups() {
 
     return (
         <>
-            <header className="header">
-                <img className="header__logo" src={headerLogo} alt="Логотип Место" />
-                <Link className="header__link_sign-in" to='/sign-in'>Войти</Link>
-            </header>
+            <Header>
+            <Link className="header__link_sign-in" to='/sign-in'>Войти</Link>
+            </ Header>
             <form className="register-form" onSubmit={handleSubmit}>
                 <h3 className="register-form__title">Регистрация</h3>
                 <input className="register-form__input" type="email" name="email" id="input-name" placeholder="Email" required minLength="2" maxLength="40" value={values.email} onChange={handleChange} />

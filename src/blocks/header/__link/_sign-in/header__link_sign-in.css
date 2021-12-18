@@ -7,3 +7,7 @@
     font-size: 18px;
     line-height: 22px;
 }
+
+.header__link_sign-in:hover {
+    opacity: 0.6;
+}

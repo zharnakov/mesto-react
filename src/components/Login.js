@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import headerLogo from '../images/logotip.svg'
 import { Link, useNavigate } from 'react-router-dom';
+import Header from "./Header";
 
 import * as auth from '../utils/auth'
 
@@ -37,7 +37,7 @@ function Login({ onLogin }) {
                     })
 
                     localStorage.setItem('jwt', res.token)
-                    onLogin()
+                    onLogin(values.email)
                     navigate('/')
                 }
             })
@@ -45,10 +45,9 @@ function Login({ onLogin }) {
     }
     return (
         <>
-            <header className="header">
-                <img className="header__logo" src={headerLogo} alt="Логотип Место" />
-                <Link className="header__link_sign-in" to='/sign-up'>Регистрация</Link>
-            </header>
+            <Header>
+            <Link className="header__link_sign-in" to='/sign-up'>Регистрация</Link>
+            </ Header>
             <form className="register-form" onSubmit={handleSubmit}>
                 <h3 className="register-form__title">Вход</h3>
                 <input className="register-form__input" type="email" name="email" id="input-name" placeholder="Email" required minLength="2" maxLength="40" value={values.email} onChange={handleChange} />

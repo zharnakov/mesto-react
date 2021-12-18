@@ -8,5 +8,10 @@
         border: none;
         line-height: 22px;
         font-size: 18px;
-
 }
+
+.register-form__submit-button:hover {
+        opacity: 0.85;
+}
+
+
